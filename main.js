@@ -8,6 +8,7 @@ $(function () {
     let item = $('<li class="list">').append(world);
     list.append(item);
   };
+  // 要素の頭に ^ をつける関数editElementを作成
   function editElement(element) {
     let result = "^" + element;
     return result
@@ -16,9 +17,12 @@ $(function () {
   $("#submit").on("click", function () {
     // 入力された値をval()で取得
     let input = $("#keyword").val();
+    // スペースで文字列を区切った配列を作成
     let inputs = input.split(" ")
+    // 配列の要素を加工した新しい配列を作成する
     let newInputs = inputs.map(editElement);
     // 正規表現オブジェクトを生成し、変数に格納
+    // 複数の言葉が要素の配列newInputsの要素を | でつなぐことで複数検索ができるようにする
     let reg = RegExp(newInputs.join("|"));
     // 2回目以降の検索時に前の検索結果を反映させないように削除
     $(".list").remove();
