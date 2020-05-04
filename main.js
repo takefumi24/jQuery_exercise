@@ -8,13 +8,18 @@ $(function () {
     let item = $('<li class="list">').append(world);
     list.append(item);
   };
-
+  function editElement(element) {
+    let result = "^" + element;
+    return result
+  }
   // 検索ボタンがクリックされた際にイベント発火
   $("#submit").on("click", function () {
     // 入力された値をval()で取得
     let input = $("#keyword").val();
+    let inputs = input.split(" ")
+    let newInputs = inputs.map(editElement);
     // 正規表現オブジェクトを生成し、変数に格納
-    let reg = new RegExp("^" + input);
+    let reg = RegExp(newInputs.join("|"));
     // 2回目以降の検索時に前の検索結果を反映させないように削除
     $(".list").remove();
     // 配列の要素を一つずつ取り出して比較する
